@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .title-lg {
+    @apply font-display text-3xl font-bold;
+  }
+
+  .title-md {
+    @apply font-display text-2xl font-bold;
+  }
+
+  .title-sm {
+    @apply font-display text-lg font-bold;
+  }
+
+  .subtitle {
+    @apply font-sans text-base font-semibold;
+  }
+
+  .body-md {
+    @apply font-sans text-base font-normal;
+  }
+
+  .body-sm {
+    @apply font-sans text-sm font-normal;
+  }
+
+  .body-xs {
+    @apply font-sans text-xs font-normal;
+  }
+
+  .label-md {
+    @apply font-sans text-xs font-medium uppercase;
+  }
+
+  .label-sm {
+    @apply text-2xs font-sans font-medium uppercase;
+  }
+
+  .action-md {
+    @apply font-sans text-base font-medium;
+  }
+
+  .action-sm {
+    @apply font-sans text-sm font-medium;
+  }
+}
