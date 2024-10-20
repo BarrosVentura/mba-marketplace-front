@@ -23,6 +23,11 @@ export default {
         "danger": "#DC3545",
         "success": "#28A745"
       },
+      backgroundColor: (theme) => (
+        {
+          ...theme.colors
+        }
+      ),
       fontFamily: {
         display: 'DM Sans, ui-sans-serif',
         sans: 'Poppins, ui-sans-serif'

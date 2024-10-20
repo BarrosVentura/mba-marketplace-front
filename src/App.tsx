@@ -1,9 +1,7 @@
+import { LoginPage } from "./pages/login"
 
 function App() {
-
-  return (
-   <h1>Hello world</h1>
-  )
+  return <LoginPage />
 }
 
 export default App
