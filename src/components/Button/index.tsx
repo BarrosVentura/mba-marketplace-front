@@ -1,6 +1,6 @@
 import { HugeiconsProps } from 'hugeicons-react'
 import { ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { ClassNameValue, twMerge } from 'tailwind-merge'
 
 export function Button({
   IconLeft,
@@ -9,7 +9,8 @@ export function Button({
   size,
   type,
   stretch,
-  children
+  children,
+  className
 }: {
   IconLeft?: React.FC<
     Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
@@ -22,6 +23,7 @@ export function Button({
   type: 'outline' | 'solid'
   stretch: 'contain' | 'full'
   children: ReactNode
+  className?: ClassNameValue
 }) {
   const solidStyles = 'bg-orange-base  text-white hover:bg-orange-dark'
   const outlineStyles =
@@ -46,6 +48,7 @@ export function Button({
     <button
       onClick={onClick}
       className={twMerge(
+        className,
         'flex rounded-lg',
         propsDictionary[size],
         propsDictionary[type],

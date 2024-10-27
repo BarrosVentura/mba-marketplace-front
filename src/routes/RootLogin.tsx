@@ -14,7 +14,7 @@ export function RootLogin() {
   }, [location.pathname, navigate])
 
   return (
-    <main className='flex h-screen w-screen gap-[24px] bg-background p-6'>
+    <main className='fixed flex h-screen w-screen gap-[24px] bg-background p-6'>
       <div className='flex flex-1 flex-col'>
         <div>
           <img src={Logo} alt='' />
