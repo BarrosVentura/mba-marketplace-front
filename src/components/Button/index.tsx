@@ -49,7 +49,7 @@ export function Button({
       onClick={onClick}
       className={twMerge(
         className,
-        'flex rounded-lg',
+        'flex items-center rounded-xl',
         propsDictionary[size],
         propsDictionary[type],
         propsDictionary[stretch]
