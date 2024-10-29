@@ -4,6 +4,7 @@ import { RootLogin } from './RootLogin'
 import { RegisterPage } from '@/pages/register'
 import { RootDash } from './RootDash'
 import { HomePage } from '@/pages'
+import { ProductsPage } from '@/pages/produtcs'
 
 export const router = createBrowserRouter([
   {
@@ -13,15 +14,19 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />
+      },
+      {
+        path: 'products',
+        element: <ProductsPage />
       }
     ]
   },
   {
-    path: '/login',
+    path: '/',
     Component: RootLogin,
     children: [
       {
-        index: true,
+        path: 'login',
         element: <LoginPage />
       },
       {

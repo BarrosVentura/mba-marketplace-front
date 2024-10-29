@@ -14,9 +14,10 @@ export function Input({
   IconLeft,
   isError,
   helperText,
-  toggleView
+  toggleView,
+  onClick
 }: {
-  label: string
+  label?: string
   id: string
   placeholder: string
   IconLeft?: React.FC<
@@ -28,6 +29,7 @@ export function Input({
   isError?: boolean
   helperText?: string
   toggleView?: boolean
+  onClick?: () => void
 }) {
   const [togglePasswordView, setTogglePasswordView] = useState(false)
 
@@ -44,15 +46,17 @@ export function Input({
           : 'text-gray-200 has-[input:focus]:text-orange-base has-[input:not(:placeholder-shown)]:text-orange-base'
       )}
     >
-      <label
-        htmlFor={id}
-        className={twMerge(
-          'label-md text-gray-300',
-          isError ? '' : 'group-has-[input:focus]:text-current'
-        )}
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className={twMerge(
+            'label-md text-gray-300',
+            isError ? '' : 'group-has-[input:focus]:text-current'
+          )}
+        >
+          {label}
+        </label>
+      )}
       <div className='relative flex'>
         {IconLeft && (
           <IconLeft className='absolute top-[50%] z-0 translate-y-[-50%]' />
@@ -62,6 +66,7 @@ export function Input({
           id={id}
           placeholder={placeholder}
           className='z-10 w-full border-b border-b-gray-100 bg-transparent px-8 py-[14px] text-gray-400 caret-orange-base outline-none'
+          onClick={onClick}
         />
         {toggleView && (
           <button

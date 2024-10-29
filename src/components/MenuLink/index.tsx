@@ -16,7 +16,7 @@ export function MenuLink({
 }) {
   const location = useLocation()
 
-  const isActive = location.pathname.includes(to)
+  const isActive = location.pathname == to
 
   return (
     <Link
