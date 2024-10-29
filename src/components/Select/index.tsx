@@ -1,10 +1,14 @@
-import { HugeiconsProps } from 'hugeicons-react'
+import {
+  ArrowDown01Icon,
+  ArrowUp01Icon,
+  Cancel01Icon,
+  SaleTag02Icon
+} from 'hugeicons-react'
 import { Input } from '../Input'
 import { useState } from 'react'
 import { SelectItem } from '../SelectItem'
 
 export function Select({
-  IconLeft,
   id,
   label,
   placeholder,
@@ -13,36 +17,42 @@ export function Select({
   label?: string
   id: string
   placeholder: string
-  IconLeft?: React.FC<
-    Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
-  >
-  IconRight?: React.FC<
-    Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
-  >
   isError?: boolean
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
+  const [selectedOption, setSelectedOption] = useState<string>('')
   const options = ['cor', 'tipo', 'teste']
 
   function handleSelectItemClick(item: string) {
-    if (selectedOptions.includes(item)) {
-      return setSelectedOptions((state) =>
-        state.filter((content) => content !== item)
-      )
+    if (selectedOption == item) {
+      return setSelectedOption('')
     }
-    setSelectedOptions((state) => [...state, item])
+    setSelectedOption(item)
   }
 
   return (
     <div className='relative'>
       <Input
-        IconLeft={IconLeft}
+        IconLeft={SaleTag02Icon}
         id={id}
         label={label}
         placeholder={placeholder}
         isError={isError}
         onClick={() => setIsDropdownOpen((state) => !state)}
+        value={selectedOption}
+        actions={
+          <div className='absolute right-0 top-[50%] z-20 flex translate-y-[-50%] gap-1 rounded border border-transparent bg-none text-gray-300'>
+            {selectedOption && (
+              <button
+                className='grid h-6 w-6 place-items-center rounded-full bg-shape'
+                onClick={() => setSelectedOption('')}
+              >
+                <Cancel01Icon className='h-4 w-4' />
+              </button>
+            )}
+            {isDropdownOpen ? <ArrowUp01Icon /> : <ArrowDown01Icon />}
+          </div>
+        }
       />
 
       {isDropdownOpen && (
@@ -51,7 +61,7 @@ export function Select({
             <SelectItem
               key={item}
               label={item}
-              isSelected={selectedOptions.includes(item)}
+              isSelected={selectedOption == item}
               onClick={() => handleSelectItemClick(item)}
             />
           ))}

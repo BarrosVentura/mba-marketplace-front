@@ -4,18 +4,21 @@ import {
   ViewIcon,
   ViewOffIcon
 } from 'hugeicons-react'
-import { useState } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { ReactNode, useState } from 'react'
+import { ClassNameValue, twMerge } from 'tailwind-merge'
 
 export function Input({
   label,
   id,
   placeholder,
   IconLeft,
+  actions,
   isError,
   helperText,
   toggleView,
-  onClick
+  onClick,
+  value,
+  className
 }: {
   label?: string
   id: string
@@ -23,13 +26,13 @@ export function Input({
   IconLeft?: React.FC<
     Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
   >
-  IconRight?: React.FC<
-    Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
-  >
+  actions?: ReactNode
   isError?: boolean
   helperText?: string
   toggleView?: boolean
   onClick?: () => void
+  value?: string
+  className?: ClassNameValue
 }) {
   const [togglePasswordView, setTogglePasswordView] = useState(false)
 
@@ -41,6 +44,7 @@ export function Input({
     <div
       className={twMerge(
         'group',
+        className,
         isError
           ? 'text-danger'
           : 'text-gray-200 has-[input:focus]:text-orange-base has-[input:not(:placeholder-shown)]:text-orange-base'
@@ -67,6 +71,7 @@ export function Input({
           placeholder={placeholder}
           className='z-10 w-full border-b border-b-gray-100 bg-transparent px-8 py-[14px] text-gray-400 caret-orange-base outline-none'
           onClick={onClick}
+          value={value}
         />
         {toggleView && (
           <button
@@ -79,6 +84,7 @@ export function Input({
             {togglePasswordView ? <ViewIcon /> : <ViewOffIcon />}
           </button>
         )}
+        {actions}
       </div>
       {isError && (
         <div className='flex items-center gap-1 pt-2'>

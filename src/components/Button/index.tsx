@@ -33,7 +33,8 @@ export function Button({
   const smallSizeStyle = 'action-sm px-4 py-3'
 
   const containStyle = 'gap-2'
-  const fullStyle = 'w-full justify-between'
+  const fullStyle =
+    IconLeft || IconRight ? 'w-full justify-between' : 'w-full justify-center'
 
   const propsDictionary = {
     medium: mediumSizeStyle,
