@@ -5,7 +5,7 @@ export function Card() {
     <a className='relative rounded-[20px] bg-white'>
       <div className='absolute right-1 top-1 flex gap-1'>
         <Tag type='available' />
-        <Tag type='sold' />
+        <Tag>Móvel</Tag>
       </div>
       <img
         className='h-[144px] w-full rounded-2xl object-cover p-1'

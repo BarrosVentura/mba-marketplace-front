@@ -4,7 +4,7 @@ import { Button } from '@/components/Button'
 import { ChartHistogramIcon, PackageIcon, PlusSignIcon } from 'hugeicons-react'
 import { MenuLink } from '@/components/MenuLink'
 
-export function RootDash() {
+export function AppLayout() {
   return (
     <main className='min-h-screen bg-background'>
       <header className='flex items-center justify-between border-b border-shape p-5'>

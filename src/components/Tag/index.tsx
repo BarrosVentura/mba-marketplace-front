@@ -1,7 +1,14 @@
+import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export function Tag({ type }: { type: 'available' | 'sold' | 'disabled' }) {
-  const typeHashtable = {
+export function Tag({
+  type,
+  children
+}: {
+  children?: ReactNode
+  type?: 'available' | 'sold' | 'disabled'
+}) {
+  const typeHashTable = {
     available: {
       style: 'bg-blue-dark text-white',
       text: 'anunciado'
@@ -13,21 +20,17 @@ export function Tag({ type }: { type: 'available' | 'sold' | 'disabled' }) {
     disabled: {
       style: 'bg-gray-300 text-white',
       text: 'desativado'
-    },
-    portable: {
-      style: 'bg-gray-400 text-white',
-      text: 'móvel'
     }
   }
 
   return (
     <div
       className={twMerge(
-        'label-sm rounded-full px-2 py-1 uppercase',
-        typeHashtable[type].style
+        'label-sm rounded-full bg-gray-400 px-2 py-1 uppercase text-white',
+        type && typeHashTable[type].style
       )}
     >
-      {typeHashtable[type].text}
+      {type ? typeHashTable[type].text : children}
     </div>
   )
 }

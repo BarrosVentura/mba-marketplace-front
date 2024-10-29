@@ -1,9 +1,9 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import Logo from '../assets/Logo.svg'
-import Backdrop from '../assets/Background.png'
+import Logo from '@/assets/Logo.svg'
+import Backdrop from '@/assets/Background.png'
 import { useEffect } from 'react'
 
-export function RootLogin() {
+export function LoginLayout() {
   const location = useLocation()
   const navigate = useNavigate()
 
