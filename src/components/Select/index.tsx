@@ -12,12 +12,14 @@ export function Select({
   id,
   label,
   placeholder,
-  isError
+  isError,
+  hideIcon
 }: {
   label?: string
   id: string
   placeholder: string
   isError?: boolean
+  hideIcon?: boolean
 }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<string>('')
@@ -33,7 +35,7 @@ export function Select({
   return (
     <div className='relative'>
       <Input
-        IconLeft={SaleTag02Icon}
+        IconLeft={hideIcon ? undefined : SaleTag02Icon}
         id={id}
         label={label}
         placeholder={placeholder}

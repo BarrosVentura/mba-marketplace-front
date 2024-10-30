@@ -4,6 +4,7 @@ import { RegisterPage } from '@/pages/auth/register'
 import { HomePage } from '@/pages/dashboard'
 import { AppLayout } from '@/pages/dashboard/layout'
 import { ProductsPage } from '@/pages/product'
+import { CreateProductPage } from '@/pages/product/create'
 import { ProductPage } from '@/pages/product/productId'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: 'product/:id',
         element: <ProductPage />
+      },
+      {
+        path: 'create',
+        element: <CreateProductPage />
       }
     ]
   },

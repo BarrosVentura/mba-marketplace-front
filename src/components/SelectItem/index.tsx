@@ -16,7 +16,13 @@ export function SelectItem({
   )
 
   return (
-    <button onClick={onClick} className={styles}>
+    <button
+      onClick={(event) => {
+        event.preventDefault()
+        onClick()
+      }}
+      className={styles}
+    >
       <span>{label}</span>
       {isSelected && <Tick02Icon className='text-orange-base' />}
     </button>

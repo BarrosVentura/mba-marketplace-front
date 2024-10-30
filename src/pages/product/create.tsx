@@ -1,34 +1,23 @@
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { Link } from '@/components/Link'
 import { Select } from '@/components/Select'
-import { ArrowLeft02Icon, Tick01Icon, UnavailableIcon } from 'hugeicons-react'
-import { useParams, Link as RouterLink } from 'react-router-dom'
+import { UploadButton } from '@/components/UploadButton'
+import { useParams } from 'react-router-dom'
 
-export function ProductPage() {
+export function CreateProductPage() {
   const { id } = useParams()
 
   return (
     <>
-      <Link asChild>
-        <RouterLink to='/products' className='col-span-12 mb-2 flex'>
-          <ArrowLeft02Icon /> Voltar
-        </RouterLink>
-      </Link>
-      <h1 className='title-md col-span-12 text-gray-500'>Editar produto</h1>
-      <div className='col-span-12 mb-10 flex items-end justify-between'>
-        <span className='body-sm text-gray-300'>
-          Gerencie as informações do produto cadastrado
-        </span>
-        <div className='flex gap-4'>
-          <Link IconLeft={Tick01Icon}>Marcar como vendido</Link>
-          <Link IconLeft={UnavailableIcon}>Desativar anúncio</Link>
-        </div>
-      </div>
-      <img
-        className='col-span-5 h-[340px] w-full object-cover'
-        src='https://placehold.co/600x400'
-        alt=''
+      <h1 className='title-md col-span-12 text-gray-500'>Novo produto</h1>
+      <span className='body-sm col-span-12 mb-10 text-gray-300'>
+        Cadastre um produto para venda no marketplace
+      </span>
+
+      <UploadButton
+        // imgSrc='https://placehold.co/600x400'
+        className='col-span-5'
+        size='product'
       />
       <form className='col-span-7 rounded-[20px] bg-white p-6'>
         <h2 className='title-sm mb-6 text-gray-300'>Dados do produto</h2>

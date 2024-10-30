@@ -18,7 +18,8 @@ export function Input({
   toggleView,
   onClick,
   value,
-  className
+  className,
+  customIcon
 }: {
   label?: string
   id: string
@@ -26,6 +27,7 @@ export function Input({
   IconLeft?: React.FC<
     Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
   >
+  customIcon?: ReactNode
   actions?: ReactNode
   isError?: boolean
   helperText?: string
@@ -65,11 +67,15 @@ export function Input({
         {IconLeft && (
           <IconLeft className='absolute top-[50%] z-0 translate-y-[-50%]' />
         )}
+        {customIcon}
         <input
           type={toggleView && togglePasswordView ? 'password' : 'text'}
           id={id}
           placeholder={placeholder}
-          className='z-10 w-full border-b border-b-gray-100 bg-transparent px-8 py-[14px] text-gray-400 caret-orange-base outline-none'
+          className={twMerge(
+            'z-10 w-full border-b border-b-gray-100 bg-transparent py-[14px] text-gray-400 caret-orange-base outline-none',
+            IconLeft || customIcon ? 'px-8' : 'pr-8'
+          )}
           onClick={onClick}
           value={value}
         />
