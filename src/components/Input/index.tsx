@@ -4,23 +4,10 @@ import {
   ViewIcon,
   ViewOffIcon
 } from 'hugeicons-react'
-import { ReactNode, useState } from 'react'
+import { forwardRef, ReactNode, useState } from 'react'
 import { ClassNameValue, twMerge } from 'tailwind-merge'
 
-export function Input({
-  label,
-  id,
-  placeholder,
-  IconLeft,
-  actions,
-  isError,
-  helperText,
-  toggleView,
-  onClick,
-  value,
-  className,
-  customIcon
-}: {
+interface InputProps {
   label?: string
   id: string
   placeholder: string
@@ -29,13 +16,30 @@ export function Input({
   >
   customIcon?: ReactNode
   actions?: ReactNode
-  isError?: boolean
-  helperText?: string
+  errorMessage?: string
   toggleView?: boolean
   onClick?: () => void
   value?: string
   className?: ClassNameValue
-}) {
+}
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(function (
+  {
+    label,
+    id,
+    placeholder,
+    IconLeft,
+    actions,
+    errorMessage,
+    toggleView,
+    onClick,
+    value,
+    className,
+    customIcon,
+    ...rest
+  },
+  ref
+) {
   const [togglePasswordView, setTogglePasswordView] = useState(false)
 
   function handleTogglePassword() {
@@ -45,9 +49,9 @@ export function Input({
   return (
     <div
       className={twMerge(
-        'group',
+        'group relative mb-3',
         className,
-        isError
+        errorMessage
           ? 'text-danger'
           : 'text-gray-200 has-[input:focus]:text-orange-base has-[input:not(:placeholder-shown)]:text-orange-base'
       )}
@@ -57,7 +61,7 @@ export function Input({
           htmlFor={id}
           className={twMerge(
             'label-md text-gray-300',
-            isError ? '' : 'group-has-[input:focus]:text-current'
+            errorMessage ? '' : 'group-has-[input:focus]:text-current'
           )}
         >
           {label}
@@ -65,19 +69,21 @@ export function Input({
       )}
       <div className='relative flex'>
         {IconLeft && (
-          <IconLeft className='absolute top-[50%] z-0 translate-y-[-50%]' />
+          <IconLeft className='absolute top-[50%] z-10 translate-y-[-50%]' />
         )}
         {customIcon}
         <input
+          ref={ref}
           type={toggleView && togglePasswordView ? 'password' : 'text'}
           id={id}
           placeholder={placeholder}
           className={twMerge(
-            'z-10 w-full border-b border-b-gray-100 bg-transparent py-[14px] text-gray-400 caret-orange-base outline-none',
+            'z-0 w-full border-b border-b-gray-100 bg-transparent py-[14px] text-gray-400 caret-orange-base outline-none',
             IconLeft || customIcon ? 'px-8' : 'pr-8'
           )}
           onClick={onClick}
           value={value}
+          {...rest}
         />
         {toggleView && (
           <button
@@ -92,12 +98,12 @@ export function Input({
         )}
         {actions}
       </div>
-      {isError && (
-        <div className='flex items-center gap-1 pt-2'>
+      {errorMessage && (
+        <div className='absolute bottom-[-20px] flex items-center gap-1'>
           <AlertCircleIcon className='text-current' width={14} height={14} />{' '}
-          <span className='body-xs'>{helperText}</span>
+          <span className='body-xs'>{errorMessage}</span>
         </div>
       )}
     </div>
   )
-}
+})

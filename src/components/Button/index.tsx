@@ -1,4 +1,4 @@
-import { HugeiconsProps } from 'hugeicons-react'
+import { HugeiconsProps, Loading03Icon } from 'hugeicons-react'
 import { ReactNode } from 'react'
 import { ClassNameValue, twMerge } from 'tailwind-merge'
 
@@ -10,7 +10,8 @@ export function Button({
   type,
   stretch,
   children,
-  className
+  className,
+  isLoading
 }: {
   IconLeft?: React.FC<
     Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
@@ -18,12 +19,13 @@ export function Button({
   IconRight?: React.FC<
     Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
   >
-  onClick: () => void
+  onClick?: () => void
   size: 'medium' | 'small'
   type: 'outline' | 'solid'
   stretch: 'contain' | 'full'
   children: ReactNode
   className?: ClassNameValue
+  isLoading?: boolean
 }) {
   const solidStyles = 'bg-orange-base  text-white hover:bg-orange-dark'
   const outlineStyles =
@@ -48,16 +50,19 @@ export function Button({
   return (
     <button
       onClick={onClick}
+      disabled={isLoading}
       className={twMerge(
         className,
-        'flex items-center rounded-xl',
+        'flex items-center rounded-xl disabled:grayscale',
         propsDictionary[size],
         propsDictionary[type],
         propsDictionary[stretch]
       )}
     >
       {IconLeft && <IconLeft />}
-      <span>{children}</span>
+      <span className='flex gap-2'>
+        {children} {isLoading && <Loading03Icon className='animate-spin' />}
+      </span>
       {IconRight && <IconRight />}
     </button>
   )
