@@ -187,7 +187,7 @@ export function RegisterPage() {
       <div className='flex flex-1 flex-col justify-end gap-5'>
         <p className='body-md text-gray-300'>Já tem uma conta?</p>
         <Button
-          onClick={() => {}}
+          onClick={() => navigate('/login')}
           size='medium'
           type='outline'
           IconRight={ArrowRight02Icon}

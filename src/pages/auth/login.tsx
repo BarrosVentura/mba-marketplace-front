@@ -39,7 +39,6 @@ export function LoginPage() {
   })
 
   function handleSubmitForm(data: LoginSchema) {
-    console.log({ data })
     login.mutate(data)
   }
 
