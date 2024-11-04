@@ -20,6 +20,10 @@ export function Tag({
     disabled: {
       style: 'bg-gray-300 text-white',
       text: 'desativado'
+    },
+    cancelled: {
+      style: 'bg-gray-300 text-white',
+      text: 'cancelado'
     }
   }
 

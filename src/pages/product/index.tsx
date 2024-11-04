@@ -2,9 +2,16 @@ import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
 import { Input } from '@/components/Input'
 import { Select } from '@/components/Select'
+import { getSellerProducts } from '@/service/get-seller-products'
+import { useQuery } from '@tanstack/react-query'
 import { Search01Icon } from 'hugeicons-react'
 
 export function ProductsPage() {
+  const sellerProducts = useQuery({
+    queryFn: getSellerProducts,
+    queryKey: ['seller-products']
+  })
+
   return (
     <>
       <h1 className='title-md col-span-12 text-gray-500'>Seus produtos</h1>
@@ -32,10 +39,29 @@ export function ProductsPage() {
         </Button>
       </div>
       <div className='col-span-8 grid grid-cols-2 gap-4'>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {!sellerProducts.isError &&
+          !sellerProducts.isLoading &&
+          sellerProducts.data?.data.products.map(
+            ({
+              category,
+              id,
+              description,
+              priceInCents,
+              status,
+              title,
+              attachments
+            }) => (
+              <Card
+                key={id}
+                category={category.title}
+                description={description}
+                price={priceInCents}
+                mainImageUrl={attachments[0].url}
+                status={status}
+                title={title}
+              />
+            )
+          )}
       </div>
     </>
   )
