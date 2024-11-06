@@ -1,3 +1,4 @@
+import { Status } from '@/@types/status'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -6,7 +7,7 @@ export function Tag({
   children
 }: {
   children?: ReactNode
-  type?: 'available' | 'sold' | 'disabled'
+  type?: Status
 }) {
   const typeHashTable = {
     available: {

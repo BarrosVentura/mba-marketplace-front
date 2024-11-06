@@ -1,7 +1,8 @@
+import { Status } from '@/@types/status'
 import { Tag } from '../Tag'
 
 interface CardProps {
-  status: 'available' | 'sold' | 'disabled'
+  status: Status
   category: string
   title: string
   price: number

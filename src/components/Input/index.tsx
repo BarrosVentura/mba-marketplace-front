@@ -4,7 +4,12 @@ import {
   ViewIcon,
   ViewOffIcon
 } from 'hugeicons-react'
-import { forwardRef, ReactNode, useState } from 'react'
+import {
+  forwardRef,
+  HTMLInputAutoCompleteAttribute,
+  ReactNode,
+  useState
+} from 'react'
 import { ClassNameValue, twMerge } from 'tailwind-merge'
 
 interface InputProps {
@@ -21,6 +26,7 @@ interface InputProps {
   onClick?: () => void
   value?: string
   className?: ClassNameValue
+  autoComplete?: HTMLInputAutoCompleteAttribute
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function (
@@ -36,6 +42,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function (
     value,
     className,
     customIcon,
+    autoComplete,
     ...rest
   },
   ref
@@ -73,6 +80,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function (
         )}
         {customIcon}
         <input
+          autoComplete={autoComplete}
           ref={ref}
           type={toggleView && togglePasswordView ? 'password' : 'text'}
           id={id}

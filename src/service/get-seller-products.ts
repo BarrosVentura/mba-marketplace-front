@@ -1,3 +1,4 @@
+import { Status } from '@/@types/status'
 import { api } from '@/lib/axios'
 
 interface Product {
@@ -5,7 +6,7 @@ interface Product {
   title: string
   description: string
   priceInCents: number
-  status: 'available' | 'sold' | 'disabled'
+  status: Status
   category: {
     id: string
     title: string
@@ -17,6 +18,17 @@ interface Product {
   }[]
 }
 
-export function getSellerProducts() {
-  return api.get<{ products: Product[] }>('/products/me')
+export function getSellerProducts({
+  search,
+  status
+}: {
+  search: string | null
+  status: Status | null
+}) {
+  return api.get<{ products: Product[] }>('/products/me', {
+    params: {
+      search,
+      status
+    }
+  })
 }
