@@ -108,6 +108,7 @@ export function ProductsPage() {
             }) => (
               <Card
                 key={id}
+                id={id}
                 category={category.title}
                 description={description}
                 price={priceInCents}

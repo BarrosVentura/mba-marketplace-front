@@ -1,5 +1,6 @@
 import { Status } from '@/@types/status'
 import { Tag } from '../Tag'
+import { Link } from 'react-router-dom'
 
 interface CardProps {
   status: Status
@@ -8,6 +9,7 @@ interface CardProps {
   price: number
   description: string
   mainImageUrl: string
+  id: string
 }
 
 export function Card({
@@ -16,10 +18,11 @@ export function Card({
   title,
   price,
   description,
-  mainImageUrl
+  mainImageUrl,
+  id
 }: CardProps) {
   return (
-    <a className='relative rounded-[20px] bg-white'>
+    <Link to={`/product/${id}`} className='relative rounded-[20px] bg-white'>
       <div className='absolute right-1 top-1 flex gap-1'>
         <Tag type={status} />
         <Tag>{category}</Tag>
@@ -41,6 +44,6 @@ export function Card({
         </div>
         <p className='body-sm line-clamp-2 text-gray-300'>{description}</p>
       </div>
-    </a>
+    </Link>
   )
 }

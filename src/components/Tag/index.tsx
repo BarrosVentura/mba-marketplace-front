@@ -1,6 +1,7 @@
-import { Status } from '@/@types/status'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
+
+import { Status } from '@/@types/status'
 
 export function Tag({
   type,
@@ -31,7 +32,7 @@ export function Tag({
   return (
     <div
       className={twMerge(
-        'label-sm rounded-full bg-gray-400 px-2 py-1 uppercase text-white',
+        'label-sm h-fit rounded-full bg-gray-400 px-2 py-1 uppercase text-white',
         type && typeHashTable[type].style
       )}
     >

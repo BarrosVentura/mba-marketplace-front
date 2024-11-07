@@ -14,7 +14,7 @@ export const UploadButton = forwardRef<HTMLInputElement, UploadButtonProps>(
   function ({ size, className, imgSrc, errorMessage, ...rest }, ref) {
     const [temporaryImageUrl, setTemporaryImageUrl] = useState<string>()
     const styles = twMerge(
-      'relative group rounded-xl bg-shape hover:bg-background cursor-pointer',
+      'relative overflow-hidden group rounded-xl bg-shape hover:bg-background cursor-pointer',
       size == 'user' ? 'h-[120px] w-[120px]' : 'h-[340px] w-full',
       className
     )
@@ -26,7 +26,7 @@ export const UploadButton = forwardRef<HTMLInputElement, UploadButtonProps>(
         {imgSrc || temporaryImageUrl ? (
           <img
             src={imgSrc || temporaryImageUrl}
-            className='h-full object-cover'
+            className='h-full w-full object-cover'
           />
         ) : (
           <div className='flex h-full flex-col items-center justify-center gap-4'>

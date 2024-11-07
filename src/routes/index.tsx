@@ -1,3 +1,5 @@
+import { createBrowserRouter } from 'react-router-dom'
+
 import { LoginLayout } from '@/pages/auth/layout'
 import { LoginPage } from '@/pages/auth/login'
 import { RegisterPage } from '@/pages/auth/register'
@@ -6,7 +8,9 @@ import { AppLayout } from '@/pages/dashboard/layout'
 import { ProductsPage } from '@/pages/product'
 import { CreateProductPage } from '@/pages/product/create'
 import { ProductPage } from '@/pages/product/productId'
-import { createBrowserRouter } from 'react-router-dom'
+import { queryClient } from '@/query/query-client'
+
+import { loader as productLoader } from './productLoader'
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +27,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'product/:id',
-        element: <ProductPage />
+        element: <ProductPage />,
+        loader: productLoader(queryClient)
       },
       {
         path: 'create',

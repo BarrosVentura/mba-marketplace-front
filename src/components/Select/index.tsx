@@ -4,8 +4,9 @@ import {
   Cancel01Icon,
   SaleTag02Icon
 } from 'hugeicons-react'
-import { Input } from '../Input'
 import { forwardRef, useState } from 'react'
+
+import { Input } from '../Input'
 import { SelectItem } from '../SelectItem'
 
 interface SelectProps {
