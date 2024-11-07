@@ -12,8 +12,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { uploadUserAvatar } from '@/service/upload-user-avatar'
-import { createUser } from '@/service/create-user'
+import { uploadImage } from '@/service/post-upload-image'
+import { createUser } from '@/service/post-create-user'
 import { useNavigate } from 'react-router-dom'
 
 const MAX_FILE_SIZE = 500000
@@ -29,7 +29,6 @@ const registerSchema = z
     avatar: z
       .custom<File[]>()
       .refine((files) => {
-        console.log(files)
         return files?.length == 1
       }, 'Avatar é obrigatório')
       .refine(
@@ -89,14 +88,14 @@ export function RegisterPage() {
     }
   })
 
-  const uploadImage = useMutation({
-    mutationFn: uploadUserAvatar
+  const uploadImageFn = useMutation({
+    mutationFn: uploadImage
   })
 
   function handleRegisterForm(userData: RegisterSchema) {
     const imageFormData = new FormData()
     imageFormData.append('files', userData.avatar[0])
-    uploadImage.mutate(imageFormData, {
+    uploadImageFn.mutate(imageFormData, {
       onSuccess({ data }) {
         createSeller.mutate({
           ...userData,

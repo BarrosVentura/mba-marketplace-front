@@ -1,10 +1,11 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import LogoOnly from '@/assets/logo-only.svg'
 import { Button } from '@/components/Button'
 import { ChartHistogramIcon, PackageIcon, PlusSignIcon } from 'hugeicons-react'
 import { MenuLink } from '@/components/MenuLink'
 
 export function AppLayout() {
+  const navigate = useNavigate()
   return (
     <main className='min-h-screen bg-background'>
       <header className='flex items-center justify-between border-b border-shape p-5'>
@@ -19,7 +20,7 @@ export function AppLayout() {
         </nav>
         <div className='flex gap-4'>
           <Button
-            onClick={() => {}}
+            onClick={() => navigate('/create')}
             size='small'
             stretch='contain'
             type='solid'
