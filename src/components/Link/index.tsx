@@ -23,7 +23,7 @@ export function Link({
     const convertedChildren = children as ReactElement
     const element = cloneElement(convertedChildren, {
       className: twMerge(
-        'text-orange-base hover:text-orange-dark',
+        'text-orange-base hover:text-orange-dark cursor-pointer',
         convertedChildren?.props?.className
       )
     })
@@ -32,7 +32,7 @@ export function Link({
 
   return (
     <a
-      className='flex gap-2 text-orange-base hover:text-orange-dark'
+      className='flex cursor-pointer gap-2 text-orange-base hover:text-orange-dark'
       onClick={onClick}
     >
       {IconLeft && <IconLeft />} {children} {IconRight && <IconRight />}

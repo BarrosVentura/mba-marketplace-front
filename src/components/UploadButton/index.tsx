@@ -8,13 +8,14 @@ interface UploadButtonProps {
   className?: ClassNameValue
   imgSrc?: string
   errorMessage?: string
+  disabled?: boolean
 }
 
 export const UploadButton = forwardRef<HTMLInputElement, UploadButtonProps>(
-  function ({ size, className, imgSrc, errorMessage, ...rest }, ref) {
+  function ({ size, className, imgSrc, errorMessage, disabled, ...rest }, ref) {
     const [temporaryImageUrl, setTemporaryImageUrl] = useState<string>()
     const styles = twMerge(
-      'relative overflow-hidden group rounded-xl bg-shape hover:bg-background cursor-pointer',
+      'relative overflow-hidden group rounded-xl bg-shape hover:bg-background cursor-pointer disabled:cursor-not-allowed disabled:grayscale',
       size == 'user' ? 'h-[120px] w-[120px]' : 'h-[340px] w-full',
       className
     )
@@ -23,9 +24,9 @@ export const UploadButton = forwardRef<HTMLInputElement, UploadButtonProps>(
 
     return (
       <label className={styles}>
-        {imgSrc || temporaryImageUrl ? (
+        {temporaryImageUrl || imgSrc ? (
           <img
-            src={imgSrc || temporaryImageUrl}
+            src={temporaryImageUrl || imgSrc}
             className='h-full w-full object-cover'
           />
         ) : (
@@ -54,6 +55,7 @@ export const UploadButton = forwardRef<HTMLInputElement, UploadButtonProps>(
           multiple={false}
           accept='image/jpeg, image/jpg, image/png, image/webp'
           className='invisible'
+          disabled={disabled}
           {...rest}
           onChange={(event) => {
             if (temporaryImageUrl) {

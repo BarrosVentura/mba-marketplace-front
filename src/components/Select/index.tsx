@@ -18,6 +18,7 @@ interface SelectProps {
   options?: string[]
   onRemove: () => void
   initialValue?: string
+  disabled?: boolean
 }
 
 export const Select = forwardRef<HTMLInputElement, SelectProps>(function (
@@ -29,6 +30,7 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function (
     options,
     onRemove,
     initialValue,
+    disabled,
     ...rest
   },
   ref
@@ -56,11 +58,13 @@ export const Select = forwardRef<HTMLInputElement, SelectProps>(function (
         placeholder={placeholder}
         value={selectedOption}
         onClick={() => setIsDropdownOpen((state) => !state)}
+        disabled={disabled}
         actions={
           <div className='absolute right-0 top-[50%] z-20 flex translate-y-[-50%] gap-1 rounded border border-transparent bg-none text-gray-300'>
             {selectedOption && (
               <button
-                className='grid h-6 w-6 place-items-center rounded-full bg-shape'
+                className='grid h-6 w-6 place-items-center rounded-full bg-shape disabled:grayscale'
+                disabled={disabled}
                 onClick={() => {
                   setSelectedOption('')
                   onRemove()

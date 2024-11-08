@@ -27,6 +27,7 @@ interface InputProps {
   value?: string
   className?: ClassNameValue
   autoComplete?: HTMLInputAutoCompleteAttribute
+  disabled?: boolean
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function (
@@ -43,6 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function (
     className,
     customIcon,
     autoComplete,
+    disabled,
     ...rest
   },
   ref
@@ -84,9 +86,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function (
           ref={ref}
           type={toggleView && togglePasswordView ? 'password' : 'text'}
           id={id}
+          disabled={disabled}
           placeholder={placeholder}
           className={twMerge(
-            'z-0 w-full border-b border-b-gray-100 bg-transparent py-[14px] text-gray-400 caret-orange-base outline-none',
+            'z-0 w-full border-b border-b-gray-100 bg-transparent py-[14px] text-gray-400 caret-orange-base outline-none disabled:grayscale',
             IconLeft || customIcon ? 'px-8' : 'pr-8'
           )}
           onClick={onClick}

@@ -11,7 +11,8 @@ export function Button({
   stretch,
   children,
   className,
-  isLoading
+  isLoading,
+  disabled
 }: {
   IconLeft?: React.FC<
     Omit<HugeiconsProps, 'ref'> & React.RefAttributes<SVGSVGElement>
@@ -26,6 +27,7 @@ export function Button({
   children: ReactNode
   className?: ClassNameValue
   isLoading?: boolean
+  disabled?: boolean
 }) {
   const solidStyles = 'bg-orange-base  text-white hover:bg-orange-dark'
   const outlineStyles =
@@ -50,7 +52,7 @@ export function Button({
   return (
     <button
       onClick={onClick}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
       className={twMerge(
         className,
         'flex items-center rounded-xl disabled:grayscale',
