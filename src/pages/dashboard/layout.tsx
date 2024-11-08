@@ -1,11 +1,20 @@
+import { useQuery } from '@tanstack/react-query'
+import { ChartHistogramIcon, PackageIcon, PlusSignIcon } from 'hugeicons-react'
 import { Outlet, useNavigate } from 'react-router-dom'
+
 import LogoOnly from '@/assets/logo-only.svg'
 import { Button } from '@/components/Button'
-import { ChartHistogramIcon, PackageIcon, PlusSignIcon } from 'hugeicons-react'
 import { MenuLink } from '@/components/MenuLink'
+import { Profile } from '@/components/Profile'
+import { getSellerProfile } from '@/service/get-seller-profile'
 
 export function AppLayout() {
   const navigate = useNavigate()
+  const seller = useQuery({
+    queryFn: getSellerProfile,
+    queryKey: ['seller-profile']
+  })
+
   return (
     <main className='min-h-screen bg-background'>
       <header className='flex items-center justify-between border-b border-shape p-5'>
@@ -18,7 +27,7 @@ export function AppLayout() {
             Produtos
           </MenuLink>
         </nav>
-        <div className='flex gap-4'>
+        <div className='flex items-center gap-4'>
           <Button
             onClick={() => navigate('/create')}
             size='small'
@@ -28,13 +37,13 @@ export function AppLayout() {
           >
             Novo produto
           </Button>
-          <div className='h-12 w-12 overflow-hidden rounded-xl'>
-            <img
-              className='h-auto max-h-full'
-              src='https://avatars.githubusercontent.com/u/28519534?v=4'
-              alt=''
-            />
-          </div>
+          <Profile
+            name={seller.data?.data.seller.name ?? ''}
+            src={
+              seller.data?.data.seller?.avatar?.url ??
+              'https://avatars.githubusercontent.com/u/28519534?v=4'
+            }
+          />
         </div>
       </header>
       <section className='m-auto mt-16 grid max-w-[1030px] grid-cols-12 gap-x-6'>
